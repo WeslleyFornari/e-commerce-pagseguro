@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Endereco;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ClienteController extends Controller
 {
@@ -20,13 +21,23 @@ class ClienteController extends Controller
         
         $usuario = new Usuario($data);
         $endereco = new Endereco($data);
+        $usuario->password = Hash::make($data['password']);
 
-        $usuario->save();
-        $endereco->usuario_id = $usuario->id;
-        $endereco->save();
+// TRY CATCH DE TRANSAÇÕES
+        try {
+            \DB::beginTransaction(); // Inicia
+
+            $usuario->save();
+            $endereco->usuario_id = $usuario->id;
+            $endereco->save();
+
+            \DB::commit(); // Confirmação
+
+        } catch (\Exception $e) {
+            \DB::rollback(); // Volta
+        }
         
-       
-        return redirect()->route('cadastrar');
-
+        return redirect()->route('cadastrar')->with('success', 'Cliente cadastrado com sucesso!');
     }
+
 }

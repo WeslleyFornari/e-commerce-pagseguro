@@ -41,17 +41,18 @@ class ProdutoController extends Controller
 
         $prod = Produto::find($id);
 
-// SESSION CART
+        // SESSION CART
         $carrinho = session('cart', []);
         array_push($carrinho, $prod);
         session(['cart' => $carrinho]);
 
         return redirect()->route('home');
     }
-
+    
+// VER
     public function carrinho(Request $request){
 
-// SESSION CART
+        // SESSION CART
         $carrinho = session('cart',[]);
         $data = ['cart' => $carrinho];
 

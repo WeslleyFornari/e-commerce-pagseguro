@@ -17,12 +17,29 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light ps-5 pe-5 pl-5 pr-5 mb-5">
     <a href="#" class="navbar-brand">MyShop</a>
     <div class="collapse navbar-collapse">
+
         <div class="navbar-nav">
             <a href="{{route('home')}}" class="nav-link">Home</a>
             <a href="{{route('todasCategorias')}}" class="nav-link">Categorias</a>
-            <a href="{{route('cadastrar')}}" class="nav-link">Cadastrar</a>
-        </div>     
+            <a href="{{route('cadastrar')}}" class="nav-link">Cadastrar</a> 
+        </div>  
+        
     </div>
+    <!-- AUtenticação de Usurio logado -->
+    @if(session('nomeUsuario'))
+        <div class="navbar-nav ml-auto">
+            <a href="{{route('logout')}}" class="nav-link">Logout</a>
+            <span class="nav-link">Olá {{ session('nomeUsuario') }}</span>
+        </div>
+                    
+    @else
+        <div class="navbar-nav ml-auto">
+        <p class="mt-2 me-4" style="color: gray">Sem usuário</p>
+        <a href="{{route('login')}}" class="nav-link">Entrar</a>
+        </div>
+                    
+    @endif
+
     <a href="{{route('carrinho')}}" class="btn btn-sm"><i class="fa fa-shopping-cart"></i></a>
 </nav>
 

@@ -2,10 +2,19 @@
 
 @section('content')
 
-    <div class="col-6">
+    <div class="col-5">
         <h2>Cadastrar Cliente</h2>
     </div>
-    
+
+    <div class="col-7">
+
+    <!--BootStrap Alert SUCCESS-->
+        @if (session('success'))
+            <div class="col-sm-7 alert alert-success" role="alert">
+            {{(session('success'))}}
+            </div>
+        @endif 
+    </div>  
 
     <form action="{{route('cadastrar_cliente')}}" method="post">
     @csrf
@@ -77,7 +86,5 @@ $('.money').mask('000.000.000.000,00');
 
 });
 </script>
-
-
 
 @endsection
