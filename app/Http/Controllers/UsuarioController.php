@@ -27,7 +27,9 @@ class UsuarioController extends Controller
             
            Auth::login($login);
        
+           session(['usuarioId' => $login->id]);
            session(['nomeUsuario' => $login->nome]);
+           session(['login' => $login]);
 
            return redirect()->route("home");
 
@@ -38,7 +40,11 @@ class UsuarioController extends Controller
 
     public function logout(Request $request){
 
-            Auth::logout();
+        $usuarioId = session('usuarioId');
+        $nomeUsuario = session('nomeUsuario');
+        $login = session('login');
+        
+        Auth::logout();
           
         return redirect()->route('home');
     }

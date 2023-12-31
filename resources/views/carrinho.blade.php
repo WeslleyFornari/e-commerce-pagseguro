@@ -2,8 +2,28 @@
 
 
 @section('content')
+<div class="col-5">
+    <h3>Carrinho</h3>
+</div>
 
-   <h3>Carrinho</h3>
+<div class="col-7">
+
+    <!--Alert SUCCESS-->
+        @if (session('success'))
+            <div class="col-sm-7 alert alert-success" role="alert">
+            {{(session('success'))}}
+            </div>
+        @endif
+
+    <!--Alert ERROR-->
+        @if ($message = Session::get("error"))
+            <div class="col-sm-7 mx-auto text-center alert alert-warning" role="alert">
+            {{$message}}
+            </div>
+        
+        @endif 
+</div>  
+   
 
 <!-- TABELA -->
    <table class="table">

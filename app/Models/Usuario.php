@@ -10,7 +10,7 @@ class Usuario extends RModel implements Authenticatable
     protected $table = "usuarios";
     protected $fillable = ['login', 'nome', 'cpf', 'password', 'email'];
 
-    protected $hidden = ['password'];
+    protected $primaryKey = 'cpf';
 
     protected $username = 'cpf';
 
